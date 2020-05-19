@@ -1,0 +1,151 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.bg-main-teal {
+    border: none;
+    background-color: $p1-main-teal;
+    color: white;
+}
+
+.btn.bg-main-teal:hover {
+    border: none;
+    background-color: #22B687;
+    color: white;
+}
+
+.bg-p1-red {
+    border: none;
+    background-color: $p1-red;
+    color: white;
+}
+
+.bg-p1-red:hover {
+    border: none;
+    background-color: $p1-red;
+    color: white;
+}
+
+.bg-p1-dark {
+    border: none;
+    background-color: $p1-dark;
+    color: white;
+}
+
+.bg-p1-dark:hover {
+    border: none;
+    background-color: $p1-bright-pink;
+    color: white;
+}
+
+.bg-p1-red-no-hover {
+    border: none;
+    background-color: $p1-red;
+    color: white;
+}
+
+.bg-p1-pink {
+    background-color: $p1-bright-pink;
+}
+
+.hover-dark:hover {
+    border: none;
+    background-color: #343a40;
+    color: white;
+}
+
+.text-main-teal {
+    color: $p1-main-teal;
+}
+
+li>a {
+    color: $p1-dark !important;
+}
+
+a:hover {
+    color: #FC175A !important;
+}
+
+@media screen and (max-width: 1000px){
+    .piggy {
+        background-image: url('../../storage/app/public/piggy_bank.png');
+        background-repeat: no-repeat;
+        background-position: 90% 50%;
+        background-size: 40%;
+    }
+
+    input {
+        opacity: 0.9;
+    }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1300px){
+    .piggy {
+        background-image: url('../../storage/app/public/piggy_bank.png');
+        background-repeat: no-repeat;
+        background-position: 70% 45%;
+        background-attachment: fixed;
+        background-size: 16%;
+    }
+
+    input {
+        opacity: 0.95;
+    }
+
+    .piggy-login {
+        background-position: 70% 35% !important;
+    }
+}
+
+@media screen and (min-width: 1300px){
+    .piggy {
+        background-image: url('../../storage/app/public/piggy_bank.png');
+        background-repeat: no-repeat;
+        background-position: 70% 35%;
+        background-attachment: fixed;
+        background-size: 13%;
+    }
+
+    .piggy-login {
+        background-position: 70% 31% !important;
+    }
+
+    input {
+        opacity: 0.95;
+    }
+}
+
+.piggy-lg {
+    background-color:rgba(252, 23, 92, 0.04);
+    background-image: url('../../storage/app/public/piggy_bank.png');
+    background-repeat: no-repeat;
+    background-position: 95% 95%;
+    background-size: 35%;
+}
+
+.container {
+    opacity: 0.95;
+}
+
+nav {
+    box-shadow: 0px 1px 5px #FC175A54;
+}
+
+.card-header {
+    background-color: $p1-dark;
+    color: white;
+}
+
+.btn-link {
+    color: white;
+}
+
+.btn-link:hover {
+    color: $p1-bright-pink;
+    text-decoration: underline;
+}
