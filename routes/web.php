@@ -6,6 +6,7 @@ use Illuminate\Support\Carbon;
 use App\Mail\StatsMail;
 use App\User;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
