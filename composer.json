@@ -33,7 +33,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "phpseclib/bcmath_compat"
+            ]
         }
     },
     "autoload": {
