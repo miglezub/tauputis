@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -40,14 +40,26 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    /*public function login(Request $request)
+    public function login(Request $request)
     {
-        $credentials = $request->only('name', 'password');
+        //$credentials = $request->only('name', 'password');
 
+        $credentials = $this->credentials($request);
         if(Auth::attempt($credentials)) {
-            //return redirect()->intended('dashboard');
-            return redirect('/home');
+            return redirect()->intended('dashboard');
         }
     }
-    */
+
+    public function credentials(Request $request)
+    {
+        $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)
+        ? 'email'
+        : 'name';
+
+        return [
+            $field => $request->get($this->username()),
+            'password' => $request->password,
+        ];
+    }
+    
 }
