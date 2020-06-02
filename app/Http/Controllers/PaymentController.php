@@ -27,6 +27,8 @@ class PaymentController extends Controller
             function() use ($user) {
                 return $user->payments->sum('value');
             });
+        $showPeriodic = request()->has('showPeriodic') ? true : false;
+        $showId = request()->has('showId') ? request('showId') : -1;
 
         //$filteredBalanceCount=$filterType!=0 || $filterDate!=0 ? $payments->sum('value'):0;
         /*
@@ -34,7 +36,7 @@ class PaymentController extends Controller
             'payment_types', 'filterType', 'filterDate', 'balanceCount',
             'filteredBalanceCount'));
             */
-        return view('payments.index', compact('balanceCount', 'payment_types'));
+        return view('payments.index', compact('balanceCount', 'payment_types', 'showPeriodic', 'showId'));
     }
 
     public function show($id)
@@ -225,5 +227,10 @@ class PaymentController extends Controller
         $stats['lastMonthExpenses'] = abs(round(Auth::user()->paymentsByDate(4)->where('is_income', '=', '0')->sum('value'), 2));
         
         return $stats;
+    }
+
+    public function balance()
+    {
+        return Auth::user()->payments->sum('value');
     }
 }

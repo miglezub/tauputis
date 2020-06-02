@@ -38,7 +38,11 @@ Vue.component('payment-group', require('./components/payments/paymentGroup.vue')
 Vue.component('add-payment', require('./components/payments/addPayment.vue').default);
 Vue.component('payments-table', require('./components/payments/paymentTable.vue').default);
 Vue.component('show-payment', require('./components/payments/showPayment.vue').default);
-Vue.component('notification', require('./components/notification.vue').default);
+Vue.component('notification', require('./components/periodicPayments/notification.vue').default);
+Vue.component('add-periodic-payment', require('./components/periodicPayments/addPeriodicPayment.vue').default);
+Vue.component('periodic-payments', require('./components/periodicPayments/allPayments.vue').default);
+Vue.component('show-periodic', require('./components/periodicPayments/showPeriodicPayment.vue').default);
+Vue.component('user-settings', require('./components/userSettings/userSettings.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -21,7 +21,7 @@ Route::get('/', 'PaymentController@index')->middleware('auth');;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/payments', 'PaymentController@index')->name('payments.show')->middleware('auth');
 //Route::get('/payments/create', 'PaymentController@create')->middleware('auth');
@@ -44,12 +44,26 @@ Route::post('/carts/update/{id}', "CartController@update")->middleware('auth');
 Route::post('/carts/add', "CartController@add")->middleware('auth');
 Route::get('/carts/monthlyUpdate', 'CartController@updateLastMonthBalances');
 
+Route::get('/user', 'UserController@index')->name('user.settings')->middleware('auth');
+
 Route::get('/apilinechartpayments', 'PaymentController@lineChartPayments')->middleware('auth');
 Route::get('/apipiechartpayments', 'PaymentController@pieChartPayments')->middleware('auth');
 Route::get('/stats', function() {
     $payment_types=\App\Payment_type::all();
     return view('stats.index', compact('payment_types'));
 })->name('stats.show')->middleware('auth');
+Route::post('/apiedituser', 'UserController@editUser')->middleware('auth');
+Route::post('/apidestroydata', 'UserController@destroyPaymentsCarts')->middleware('auth');
+Route::post('/apidestroyuser', 'UserController@destroyUser')->middleware('auth');
+Route::get('/apipaymenttypes', 'PaymentTypeController@index');
+
+Route::get('/periodic', 'PeriodicPaymentController@index')->name('periodic.show')->middleware('auth');
+Route::post('/periodic/store', 'PeriodicPaymentController@store')->middleware('auth');
+Route::delete('/periodic/delete/{id}', 'PeriodicPaymentController@destroyById')->middleware('auth');
+Route::post('/periodic/update/{id}', "PeriodicPaymentController@update")->middleware('auth');
+Route::get('/apitodaypayments', 'PeriodicPaymentController@todayPayments')->middleware('auth');
+Route::post('/periodic/storePayment', 'PeriodicPaymentController@storePayment')->middleware('auth');
+Route::get('/apibalance', 'PaymentController@balance')->middleware('auth');
 
 Route::get('/email', function() {
     //kiekvienam useriui mailas

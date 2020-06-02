@@ -19,7 +19,10 @@
                 <span class="float-right">Įplaukos: <span class="font-weight-bold">{{ data.thisMonthIncome }}</span></span>
                 <br>
                 <p v-if="data.thisMonthExpenses > data.thisMonthIncome">
-                    Išlaidos viršija pajamas <span class="font-weight-bold">{{ (data.thisMonthExpenses/data.thisMonthIncome*100 - 100).toFixed(2) }}%</span>.
+                    Išlaidos viršija pajamas 
+                    <span v-if="data.thisMonthIncome > 0" class="font-weight-bold">
+                        {{ (data.thisMonthExpenses/data.thisMonthIncome*100 - 100).toFixed(2) }}%
+                    </span>
                 </p>
                 <p v-else-if="data.thisMonthIncome > 0 && data.thisMonthExpenses >0">
                     Išlaidos sudaro <span class="font-weight-bold">{{ (data.thisMonthExpenses/data.thisMonthIncome*100).toFixed(2) }}%</span> įplaukų.
@@ -45,7 +48,10 @@
                 <span class="float-right">Įplaukos: <span class="font-weight-bold">{{ data.lastMonthIncome }}</span></span>
                 <br>
                 <p v-if="data.lastMonthExpenses > data.lastMonthIncome">
-                    Išlaidos viršija pajamas <span class="font-weight-bold">{{ (data.lastMonthExpenses/data.lastMonthIncome*100 - 100).toFixed(2) }}%</span>.
+                    Išlaidos viršija pajamas 
+                    <span v-if="data.lastMonthIncome > 0" class="font-weight-bold">
+                        {{ (data.lastMonthExpenses/data.lastMonthIncome*100 - 100).toFixed(2) }}%
+                    </span>
                 </p>
                 <p v-else-if="data.lastMonthIncome > 0 && data.lastMonthExpenses > 0">
                     Išlaidos sudaro <span class="font-weight-bold">{{ (data.lastMonthExpenses/data.lastMonthIncome*100).toFixed(2) }}%</span> įplaukų.

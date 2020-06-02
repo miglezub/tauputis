@@ -3,9 +3,10 @@
       <div class="row">
         <label for="date_from" class="form-label h5 d-inline pt-1 col-sm-6 col-lg-3">Filtruoti nuo datos:</label>
         <input type="date" name="date_from" v-model="date_from" class="form-control d-inline col-sm-6 col-lg-7"
-          :max="date_to">
+          :max="today">
         <label for="date_to" class="form-label h5 d-inline pt-3 col-sm-6 col-lg-3">Iki datos:</label>
-        <input type="date" name="date_to" v-model="date_to" class="form-control d-inline col-sm-6 col-lg-7 mt-1">
+        <input type="date" name="date_to" v-model="date_to" class="form-control d-inline col-sm-6 col-lg-7 mt-1"
+          :max="today">
         <button class="btn bg-main-teal ml-2 mt-2 mt-md-1 h-75" v-on:click="filter()">Filtruoti</button>
       </div>
       <div v-if="loaded && labels.length > 1">
@@ -22,7 +23,12 @@
         :height="800"
         :width="1800"
         :chartData="values"
-        :chartLabels="labels"/>
+        :chartLabels="labels"
+        v-if="width > 500"/>
+        <div v-else class="text-center">
+          Atsiprašome, ekranas per mažas, kad būtų rodomas balanso grafikas.
+          <br>Padidinkite naršyklės langą, arba paverskite telefoną gulsčiai.
+        </div>
         <div class="row mt-5">
           <div class="w-100 mx-auto">
             <h3 class="text-center">Išlaidų sumos pagal kategorijas (filtruotam laikotarpiui)</h3>
@@ -74,12 +80,22 @@ export default {
     loaded: false,
     date_from: new Date().getFullYear().toString() + "-01-01",
     date_to: new Date().toISOString().slice(0,10),
+    today: new Date().toISOString().slice(0,10),
+    yesterday: new Date().toISOString().slice(0,10),
     labels: [],
     values: [],
+    width: 1000,
   }),
 
-  mounted() {
-      this.filter()
+  created() {
+      this.filter();
+      window.addEventListener("resize", this.getScreenWidth);
+      this.width = window.innerWidth;
+      console.log(this.width);
+  },
+
+  destroyed() {
+      window.removeEventListener("resize", this.getScreenWidth);
   },
 
   methods: {
@@ -96,7 +112,12 @@ export default {
             .catch(err => {
                 console.log(response.data.error)
             });
-      }
+      },
+
+      getScreenWidth(event) {
+          this.width = window.innerWidth;
+          console.log(this.width);
+      },
   }
 }
 </script>

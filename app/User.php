@@ -124,4 +124,9 @@ class User extends Authenticatable
         }
         return json_encode($balances);
     }
+
+    public function periodicPayments()
+    {
+        return $this->hasMany(PeriodicPayment::class, 'fk_user_id');
+    }
 }

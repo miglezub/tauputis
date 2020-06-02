@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -31,7 +31,6 @@
                     Tauputis
                 </a>
                 @auth
-                    <span class="text-white d-inline align-text-middle pb-0" style="font-size: 16px;"> | {{ Auth::user()->payments->sum('value') }}</span>
                     <span><notification /></span>
                 @endauth
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -72,12 +71,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('user.settings') }}">
+                                        Nustatymai
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Atsijungti') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -89,11 +90,11 @@
             </div>
         </nav>
         @guest
-        <main class="py-4" style="z-index: 0">
+        <main class="py-4" style="z-index: 0;">
             @yield('content')
         </main>
         @else
-        <main class="py-4 piggy-lg" style="z-index: 0">
+        <main class="py-4 piggy-lg" style="z-index: 0; min-height: 90vh">
             @yield('content')
         </main>
         @endguest

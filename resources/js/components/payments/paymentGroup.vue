@@ -70,7 +70,7 @@ export default {
         },
 
         showPayment(payment_id) {            
-            axios.get(`http://127.0.0.1:8000/payments/${payment_id}`)
+            axios.get(`/payments/${payment_id}`)
                 .then(response => {
                     this.selected_payment = response.data;
                     this.selected_payment.value = this.selected_payment.value.toFixed(2);

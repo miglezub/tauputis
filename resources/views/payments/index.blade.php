@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Mokėjimai')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -14,8 +16,11 @@
                         </button>
                     </h2>
                     </div>
-
+                    @if( $showPeriodic == false )
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionPayments">
+                    @else
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionPayments">
+                    @endif
                         <div class="container row ml-1">
                             <payments :payment_types="{{ $payment_types }}" class="mt-4" />
                         </div>
@@ -42,6 +47,28 @@
                                 <span class="font-weight-bold">{{ $balanceCount }}</span>
                             </div>
                         <payments-table :payment_types="{{ $payment_types }}" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" 
+                            aria-expanded="false" aria-controls="collapseThree" style="font-size: 16px;">
+                        Periodiniai mokėjimai
+                        </button>
+                    </h2>
+                    </div>
+
+                    @if( $showPeriodic == true )
+                    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionPayments">
+                    @else
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionPayments">
+                    @endif
+                        <div class="container row ml-1">
+                            <periodic-payments :payment_types="{{ $payment_types }}" :show_id="{{ $showId }}"/>
+                        </div>
                     </div>
                 </div>
             </div>

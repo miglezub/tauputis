@@ -12,7 +12,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
-        'fk_payment_type_id', 'caption', 'description', 'image', 
+        'fk_payment_type_id', 'caption', 'description',  
         'is_income', 'date', 'value',
     ];
 

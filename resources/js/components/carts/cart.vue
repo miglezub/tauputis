@@ -17,7 +17,7 @@
 
             <p class="pt-1">Numatytos išlaidos: 
                 <input id="value" type="number" step="0.01" min="0" max="99999999.99" v-model="cart.monthly_goal"
-                    class="form-control w-50" v-if="edit" v-on:input="checkEditError()">
+                    class="form-control w-50" v-if="edit" v-on:input="validate()">
                 <span v-else v-text="cart.monthly_goal" class="font-weight-bold"></span>
                 <span v-if="edit_error" v-text="edit_error" class="text-danger"></span>
                 <br>
@@ -110,7 +110,7 @@ export default {
             return this.balance.toFixed(2) || 0;
         },
         /* Checks if edit input has errors */
-        checkEditError() {
+        validate() {
             if(this.cart.monthly_goal >= 0 && this.cart.monthly_goal < 99999999.99 && this.cart.monthly_goal) {
                 this.edit_error='';
             }
@@ -125,6 +125,7 @@ export default {
         },
         /* Writes changes to database */
         saveEdit() {
+            this.validate();
             if(!this.edit_error) {
                 axios
                     .post(`http://127.0.0.1:8000/carts/update/${this.cart.id}`, this.cart)
