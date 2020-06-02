@@ -119,7 +119,7 @@ export default {
         addCart() {
             if(this.validateCart()) {
                 axios
-                    .post(`http://127.0.0.1:8000/carts/add`, this.cart)
+                    .post(`/carts/add`, this.cart)
                     .then(response => {
                         this.$emit('added');
                         this.$refs['addCartModal'].hide()

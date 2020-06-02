@@ -214,7 +214,7 @@ export default {
             if (this.validate()) {
                 this.payment.type = (this.payment.is_income == 0 ? this.payment.payment_type : 1);
                 axios
-                    .post(`http://127.0.0.1:8000/periodic/store`, this.payment)
+                    .post(`/periodic/store`, this.payment)
                     .then(response => {
                         this.$refs['addPeriodicPaymentModal'].hide();
                         bus.$emit('reloadNotifications', 'added/deleted payment');

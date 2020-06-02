@@ -144,7 +144,7 @@ export default {
 
     methods: {
         fetchData() {
-            axios.get(`http://127.0.0.1:8000/periodic`)
+            axios.get(`/periodic`)
                 .then(response => {
                 this.payments = response.data;
                 this.loaded = true;

@@ -159,7 +159,7 @@ export default {
                 this.payment.payment_type = (this.payment.is_income == 0 ? this.payment.payment_type : 1);
                 //this.payment.value = (this.payment.is_income == 0 ? -this.payment.value : this.payment.value);
                 axios
-                    .post(`http://127.0.0.1:8000/payments/store`, this.payment)
+                    .post(`/payments/store`, this.payment)
                     .then(response => {
                         this.$emit('reload');
                         this.$refs['addPaymentModal'].hide();

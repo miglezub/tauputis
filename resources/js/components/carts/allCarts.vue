@@ -48,7 +48,7 @@ export default {
 
     methods: {
         fetchData() {
-            axios.get("http://127.0.0.1:8000/apicarts")
+            axios.get("/apicarts")
                 .then(response => {
                 this.carts = response.data;
                 this.available_types = this.payment_types;

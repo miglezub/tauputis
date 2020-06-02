@@ -76,7 +76,7 @@ export default {
 
     methods: {
         fetchData() {
-            axios.get(`http://127.0.0.1:8000/apigroupedpayments`)
+            axios.get(`/apigroupedpayments`)
                 .then(response => {
                 this.grouped_payments = response.data;
                 this.loaded = true;

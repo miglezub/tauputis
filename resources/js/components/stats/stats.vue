@@ -81,7 +81,7 @@ export default {
 
     methods: {
         fetchData() {
-            axios.get('http://127.0.0.1:8000//apipayments/stats')
+            axios.get('/apipayments/stats')
                 .then(response => {
                     this.data = response.data;
                     this.setVariables();

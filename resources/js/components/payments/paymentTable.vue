@@ -165,7 +165,7 @@ export default {
 
     methods: {
         fetchData() {
-            axios.get(`http://127.0.0.1:8000/apipayments?filter_type=${this.filterType}&filter_date=${this.filterDate}`)
+            axios.get(`/apipayments?filter_type=${this.filterType}&filter_date=${this.filterDate}`)
                 .then(response => {
                 this.payments = response.data;
                 this.loaded = true;

@@ -245,7 +245,7 @@ export default {
         },
 
         deleteSelected() {
-            axios.delete(`http://127.0.0.1:8000/periodic/delete/${this.selected_payment.id}`)
+            axios.delete(`/periodic/delete/${this.selected_payment.id}`)
                 .then(response => {
                     this.$emit('reload');
                     this.resetSelected();
@@ -260,7 +260,7 @@ export default {
             else {
                 if(this.validate()) {
                     axios
-                        .post(`http://127.0.0.1:8000/periodic/update/${this.selected_payment.id}`, this.selected_payment)
+                        .post(`/periodic/update/${this.selected_payment.id}`, this.selected_payment)
                         .then(response => {
                             this.edit = false;
                             this.edit_errors = [];

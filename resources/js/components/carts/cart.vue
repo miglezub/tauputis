@@ -128,7 +128,7 @@ export default {
             this.validate();
             if(!this.edit_error) {
                 axios
-                    .post(`http://127.0.0.1:8000/carts/update/${this.cart.id}`, this.cart)
+                    .post(`/carts/update/${this.cart.id}`, this.cart)
                     .then(response => {
                         this.edit_error='';
                         this.edit=false;

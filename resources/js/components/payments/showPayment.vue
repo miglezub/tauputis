@@ -183,7 +183,7 @@ export default {
         },
 
         deleteSelected() {
-            axios.delete(`http://127.0.0.1:8000/payment/delete/${this.selected_payment.id}`)
+            axios.delete(`h/payment/delete/${this.selected_payment.id}`)
                 .then(response => {
                     this.$emit('reload');
                     this.closeModal();
@@ -198,7 +198,7 @@ export default {
                 //delete
                 if(this.validate()) {
                     axios
-                        .post(`http://127.0.0.1:8000/payments/update/${this.selected_payment.id}`, this.selected_payment)
+                        .post(`/payments/update/${this.selected_payment.id}`, this.selected_payment)
                         .then(response => {
                             this.edit = false;
                             this.edit_errors = [];
