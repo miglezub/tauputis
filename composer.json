@@ -34,7 +34,7 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "phpseclib/bcmath_compat"
+                "moontoast/math"
             ]
         }
     },
