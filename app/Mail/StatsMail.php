@@ -47,8 +47,7 @@ class StatsMail extends Mailable
             $payment_types = Payment_type::all();
             //$expenses = 230;
             //$income = 220;
-            return $this->from('tauputis@noreply.com')
-                ->subject('Mėnesio ataskaita ' . date("Y-m", strtotime('first day of last month')))
+            return $this->subject('Mėnesio ataskaita ' . date("Y-m", strtotime('first day of last month')))
                 ->markdown('emails.statsMonthly', compact('username', 'email', 'expenses', 'income', 'carts', 'payment_types'));
         }
     }
