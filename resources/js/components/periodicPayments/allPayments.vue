@@ -24,7 +24,7 @@
                         {{ getDay(data.item.periodic_day, data.item.periodic_type) }}
                     </template>
                     <template v-slot:cell(value)="data">
-                        {{ data.item.value.toFixed(2) }}
+                        {{ data.item.value }}
                     </template>
                     <template v-slot:cell(payment_type)="data">
                         {{ payment_types[data.item.fk_payment_type_id-1].name }}

@@ -10,7 +10,7 @@
             <span class="font-weight-bold">Periodiniai mokėjimai:</span>
             <b-alert variant="success" :show="success_alert">Mokėjimas <strong>{{ success_text }}</strong> sėkmingai pridėtas</b-alert>
             <div class="container" v-for="payment in payments" :key="payment.id">
-              {{ getPaymentType(payment.fk_payment_type_id) + ' ' + payment.value.toFixed(2) }}
+              {{ getPaymentType(payment.fk_payment_type_id) + ' ' + payment.value }}
               <br class="my-1">
               <b-button class="btn btn-sm bg-main-teal" v-on:click="addPayment(payment)">Pridėti</b-button>
               <b-button class="btn btn-sm bg-p1-dark" v-on:click="showPeriodic(payment.id)">Peržiūrėti</b-button>

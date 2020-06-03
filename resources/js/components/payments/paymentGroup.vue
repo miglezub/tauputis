@@ -9,7 +9,7 @@
                         v-on:click="showPayment(payment.id)">
                         <div v-if="payment.caption" v-text="payment.caption" class="text-secondary"></div>
                         <div v-text="payment_types[payment.fk_payment_type_id-1].name" class="font-weight-bold h5"></div>
-                        <div v-text="payment.value.toFixed(2)" class="h5"></div>
+                        <div v-text="payment.value" class="h5"></div>
                     </div>
                 </div>
             </div>

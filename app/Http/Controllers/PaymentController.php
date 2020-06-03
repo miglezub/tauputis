@@ -197,7 +197,7 @@ class PaymentController extends Controller
                     "label" => $payment_type->name));
             }
         }
-        return json_encode($array);
+        return $array;
     }
 
     public function groupPayments()
@@ -215,7 +215,7 @@ class PaymentController extends Controller
         $page = $selectedPage <= ceil($count/2) ? $selectedPage : 1;
         return $payments->skip($count-(2*$page))->take(2)->reverse();
         */
-        return json_encode($payments);
+        return $payments;
     }
 
     public function stats()
