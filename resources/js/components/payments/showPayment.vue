@@ -14,7 +14,7 @@
             -->
             <b-container fluid class="ml-2">
                 <b-row>
-                    <b-col cols="8">
+                    <b-col md="8" sm="12">
                         <div v-if="selected_payment.caption || edit" class="form-group">
                             <label class="font-weight-bold mb-0" for="caption" style="font-size: 16px">Pavadinimas</label>
                             <b-form-group v-if="edit" id="caption-group" label-for="caption">
@@ -121,9 +121,9 @@
                             <div v-else v-text="getTypeName()"></div>
                         </div>
                     </b-col>
-                    <b-col cols="4">
-                        <button class="btn bg-main-teal w-75" v-on:click="editPayment()" v-text="edit ? 'Išsaugoti' : 'Redaguoti'"></button>
-                        <button class="btn bg-p1-red w-75 mt-1" v-on:click="$refs['confirmDeleteModal'].show()">Ištrinti</button>
+                    <b-col  md="4" sm="12" class="text-center">
+                        <button class="btn bg-main-teal w-75 mb-1 mb-md-0" v-on:click="editPayment()" v-text="edit ? 'Išsaugoti' : 'Redaguoti'"></button>
+                        <button class="btn bg-p1-red w-75 mt-md-1" v-on:click="$refs['confirmDeleteModal'].show()">Ištrinti</button>
                     </b-col>
                 </b-row>
             </b-container>
@@ -183,7 +183,7 @@ export default {
         },
 
         deleteSelected() {
-            axios.delete(`h/payment/delete/${this.selected_payment.id}`)
+            axios.delete(`/payment/delete/${this.selected_payment.id}`)
                 .then(response => {
                     this.$emit('reload');
                     this.closeModal();

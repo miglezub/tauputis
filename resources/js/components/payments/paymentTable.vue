@@ -11,7 +11,7 @@
                 <div class="col-lg-4 col-md-6">
                     <select name="filter_type" v-model="filterType" class="custom-select mb-2 mr-1 w-100">
                         <option value="0">Visi</option>
-                        <option v-for="pm_type in payment_types" :key="pm_type.id" v-if="pm_type.id != 1" :value="pm_type.id">{{ pm_type.name }}</option>
+                        <option v-for="pm_type in payment_types" :key="pm_type.id" :value="pm_type.id">{{ pm_type.name }}</option>
                     </select>
                 </div>
                 <div class="col-lg-4 col-md-6">
@@ -173,7 +173,6 @@ export default {
                     this.showBalance = true;
                 else
                     this.showBalance = false;
-                console.log(this.payments);
                 })
                 .catch(error => {
                     console.log(error);

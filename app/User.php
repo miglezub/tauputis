@@ -113,6 +113,25 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class, 'fk_user_id');
     }
 
+    public function updateCarts()
+    {
+        $carts = $this->carts;
+        foreach( $carts as $cart) {
+            if(strtotime($cart->balance_update) < strtotime('first day of this month') || 
+                $cart->balance_update == null) {
+                    $lastMonthValue = $this->payments()
+                    ->where('fk_payment_type_id', $cart->fk_type)
+                    ->whereBetween('date', [date("Y-m-d", strtotime('first day of last month')), 
+                        date("Y-m-d", strtotime('last day of last month'))])
+                    ->sum('value');
+                    $cart->last_month_value = abs($lastMonthValue);
+                    $cart->balance_update = date("Y-m-d");
+                    $cart->save();
+            }
+            else break;
+        }
+    }
+
     public function monthlyBalanceByType()
     {
         $balances=array();

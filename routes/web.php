@@ -43,7 +43,6 @@ Route::get('/apicarts', function(){
 Route::get('/carts', 'CartController@index')->name('carts.show')->middleware('auth');
 Route::post('/carts/update/{id}', "CartController@update")->middleware('auth');
 Route::post('/carts/add', "CartController@add")->middleware('auth');
-Route::get('/carts/monthlyUpdate', 'CartController@updateLastMonthBalances');
 
 Route::get('/user', 'UserController@index')->name('user.settings')->middleware('auth');
 
@@ -68,24 +67,16 @@ Route::get('/apibalance', 'PaymentController@balance')->middleware('auth');
 
 Route::get('/email', function() {
     //kiekvienam useriui mailas
-    //Mail::to('email@email.com')->send(new StatsMail($userid));
-    return new StatsMail(2);
+    Mail::to('miglezub@gmail.com')->send(new StatsMail(2));
+    //return new StatsMail(2);
 });
 
 Route::get('/sendEmail', function() {
     $users = User::all();
     foreach($users as $user) {
         Mail::to($user->email)->send(new StatsMail($user->id));
-        /*
-        Mail::send( new StatsMail(1), ['user' => $users], function( $message ) use ($users)
-        {
-            $message->from('tauputis@noreply.com', 'Tauputis');
-            $message->to('email@email.com')
-                ->subject('Mėnesio ataskaita ' . date("Y-m", strtotime('first day of last month')));
-        });
-        */
     }
 });
 
-Route::get('/seedtypes', 'PaymentTypeController@seedPaymentTypes');
+//Route::get('/seedtypes', 'PaymentTypeController@seedPaymentTypes');
 Route::get('/seedpayments', 'PaymentController@seedPayments');

@@ -16,25 +16,29 @@
                     ></b-form-radio-group>
                 </b-form-group>
 
-                <b-form-group id="caption-group" label="Pavadinimas:" label-for="caption">
-                    <b-form-input
-                    id="caption"
-                    v-model="payment.caption"
-                    type="text"
-                    placeholder="Įveskite pavadinimą (neprivalomas)"
-                    maxlength="100"
-                    ></b-form-input>
-                </b-form-group>
+                <a v-b-toggle.collapse-caption-description class="text-main-teal font-weight-bold mb-3"
+                    style="text-decoration: underline">Papildoma informacija (pavadinimas, aprašymas)</a>
+                <b-collapse id="collapse-caption-description" class="mt-2">
+                    <b-form-group id="caption-group" label="Pavadinimas:" label-for="caption">
+                        <b-form-input
+                        id="caption"
+                        v-model="payment.caption"
+                        type="text"
+                        placeholder="Įveskite pavadinimą (neprivalomas)"
+                        maxlength="100"
+                        ></b-form-input>
+                    </b-form-group>
 
-                <b-form-group id="description-group" label="Aprašymas:" label-for="description">
-                    <b-form-textarea
-                    id="description"
-                    v-model="payment.description"
-                    type="text"
-                    placeholder="Įveskite aprašymą (neprivalomas)"
-                    maxlength="255"
-                    ></b-form-textarea>
-                </b-form-group>
+                    <b-form-group id="description-group" label="Aprašymas:" label-for="description">
+                        <b-form-textarea
+                        id="description"
+                        v-model="payment.description"
+                        type="text"
+                        placeholder="Įveskite aprašymą (neprivalomas)"
+                        maxlength="255"
+                        ></b-form-textarea>
+                    </b-form-group>
+                </b-collapse>
 
                 <b-form-group id="date-group" label="Data:" label-for="date"
                     :invalid-feedback="invalidFeedbackDate()"

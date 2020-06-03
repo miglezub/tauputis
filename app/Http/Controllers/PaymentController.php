@@ -171,7 +171,7 @@ class PaymentController extends Controller
             ->whereDate('date', '<', $dateFrom)
             ->sum('value');
         foreach($payments as $payment) {
-            $value=$payment->value+$lastValue;
+            $value=round($payment->value+$lastValue, 2);
             $payment->balance=$value;
             $lastValue=$value;
         }
@@ -193,7 +193,7 @@ class PaymentController extends Controller
             if($payment[0]->fk_payment_type_id!=1) {
                 $payment_type=\App\Payment_type::where('id', $payment[0]->fk_payment_type_id)->first();
                 array_push($array, 
-                    array("value" => abs($payment->sum('value')), 
+                    array("value" => round(abs($payment->sum('value'), 2)), 
                     "label" => $payment_type->name));
             }
         }

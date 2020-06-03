@@ -46,21 +46,4 @@ class CartController extends Controller
 
         return response()->json('The cart was successfully updated');
     }
-
-    public function updateLastMonthBalances()
-    {
-        $carts = \App\Cart::all();
-        foreach( $carts as $cart ) {
-            $lastMonthValue = \App\Payment::where([
-                ['fk_user_id', "=", $cart->fk_user_id],
-                ['fk_payment_type_id', "=", $cart->fk_type],
-                ])
-            ->whereBetween('date', [date("Y-m-d", strtotime('first day of last month')), 
-                date("Y-m-d", strtotime('last day of last month'))])
-            ->sum('value');
-            $cart->last_month_value = abs($lastMonthValue);
-            $cart->save();
-        }
-        return 'updated';
-    }
 }
