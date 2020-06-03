@@ -187,14 +187,13 @@ export default {
 
         click(item) {
             this.selected = item;
-            this.selected.value = this.selected.value.toFixed(2);
             this.selected_type = item.fk_payment_type_id;
             this.$refs['modal'].$refs['showPaymentModal'].show();
         },
 
         getBalance() {
             return this.payments.length > 0 ? 
-                this.payments.map(payment => payment.value).reduce((acc, payment) => payment + acc).toFixed(2) : 0;
+                this.payments.map(payment => payment.value).reduce((acc, payment) => payment + acc) : 0;
         },
 
         getScreenWidth(event) {

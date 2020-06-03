@@ -73,7 +73,6 @@ export default {
             axios.get(`/payments/${payment_id}`)
                 .then(response => {
                     this.selected_payment = response.data;
-                    this.selected_payment.value = this.selected_payment.value.toFixed(2);
                     this.show_payment = true;
                     this.selected_type = this.selected_payment.fk_payment_type_id;
                     this.$refs['modal'].$refs['showPaymentModal'].show();
