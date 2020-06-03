@@ -243,7 +243,7 @@ class PaymentController extends Controller
             $payment->fk_user_id = $userid;
             $payment->caption = "seed";
             $payment->is_income = 0;
-            $timestamp = rand( strtotime("-1 month 15 days"), strtotime("now") );
+            $timestamp = rand( strtotime("-2 month"), strtotime("now") );
             $random_Date = date("Y-m-d", $timestamp);
             $payment->date = $random_Date;
             $payment->value = -mt_rand(10, 1000) / 10;
@@ -255,7 +255,7 @@ class PaymentController extends Controller
             $payment->fk_user_id = $userid;
             $payment->caption = "seed";
             $payment->is_income = 1;
-            $timestamp = rand( strtotime("-1 month 15 days"), strtotime("now") );
+            $timestamp = rand( strtotime("-2 month"), strtotime("now") );
             $random_Date = date("Y-m-d", $timestamp);
             $payment->date = $random_Date;
             $payment->value = mt_rand(10, 4000) / 10;
