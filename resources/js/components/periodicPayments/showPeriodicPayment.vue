@@ -6,7 +6,7 @@
             </template>
             <b-container fluid class="ml-2">
                 <b-row>
-                    <b-col cols="8">
+                    <b-col md="8" sm="12">
                         <label class="font-weight-bold mb-0" for="caption" style="font-size: 16px">Periodiškumas</label>
                         <b-form-group
                             :state="statePeriodicType()"
@@ -117,7 +117,7 @@
                                 trim
                             ></b-form-input>
                         </b-form-group>
-                        <div v-else v-text="selected_payment.value.toFixed(2)"></div>
+                        <div v-else v-text="selected_payment.value"></div>
 
                         <div v-if="selected_payment.fk_payment_type_id != 1" class="form-group">
                             <label class="font-weight-bold mb-0" for="type" style="font-size: 16px">Kategorija</label>
@@ -135,7 +135,7 @@
                             <div v-else v-text="getTypeName()"></div>
                         </div>
                     </b-col>
-                    <b-col cols="4">
+                    <b-col md="4" sm="12" class="text-center">
                         <button class="btn bg-main-teal w-75" v-on:click="editPayment()" v-text="edit ? 'Išsaugoti' : 'Redaguoti'"></button>
                         <button class="btn bg-p1-red w-75 mt-1" v-on:click="$refs['confirmDeleteModal'].show()">Ištrinti</button>
                     </b-col>
