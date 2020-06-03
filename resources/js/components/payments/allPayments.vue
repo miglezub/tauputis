@@ -76,7 +76,7 @@ export default {
 
     methods: {
         fetchData() {
-            axios.get(`/apigroupedpayments`)
+            axios.get(`http://tauputis.herokuapp.com/apigroupedpayments`)
                 .then(response => {
                 this.grouped_payments = response.data;
                 this.loaded = true;

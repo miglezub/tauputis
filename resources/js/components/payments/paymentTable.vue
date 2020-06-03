@@ -165,7 +165,7 @@ export default {
 
     methods: {
         fetchData() {
-            axios.get(`/apipayments?filter_type=${this.filterType}&filter_date=${this.filterDate}`)
+            axios.get(`http://tauputis.herokuapp.com/apipayments?filter_type=${this.filterType}&filter_date=${this.filterDate}`)
                 .then(response => {
                 this.payments = response.data;
                 this.loaded = true;
