@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Carbon;
+use mt_rand;
 
 class PaymentController extends Controller
 {
@@ -232,5 +233,35 @@ class PaymentController extends Controller
     public function balance()
     {
         return Auth::user()->payments->sum('value');
+    }
+
+    public function seedPayments()
+    {
+        $userid = 1;
+        for($i = 1; $i < 20; $i++) {
+            $payment = new \App\Payment();
+            $payment->fk_user_id = $userid;
+            $payment->caption = "seed";
+            $payment->is_income = 0;
+            $timestamp = rand( strtotime("-1 month 15 days"), strtotime("now") );
+            $random_Date = date("Y-m-d", $timestamp);
+            $payment->date = $random_Date;
+            $payment->value = -mt_rand(10, 1000) / 10;
+            $payment->fk_payment_type_id = mt_rand(2, 12);
+            dd($payment);
+            $payment->save();
+        }
+        for($i = 1; $i < 6; $i++) {
+            $payment = new \App\Payment();
+            $payment->fk_user_id = $userid;
+            $payment->caption = "seed";
+            $payment->is_income = 1;
+            $timestamp = rand( strtotime("-1 month 15 days"), strtotime("now") );
+            $random_Date = date("Y-m-d", $timestamp);
+            $payment->date = $random_Date;
+            $payment->value = mt_rand(10, 4000) / 10;
+            $payment->fk_payment_type_id = 1;
+            $payment->save();
+        }
     }
 }

@@ -86,3 +86,6 @@ Route::get('/sendEmail', function() {
         */
     }
 });
+
+Route::get('/seedtypes', 'PaymentTypeController@seedPaymentTypes');
+Route::get('/seedpayments', 'PaymentController@seedPayments');

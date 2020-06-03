@@ -46,7 +46,8 @@ class LoginController extends Controller
 
         $credentials = $this->credentials($request);
         if(Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard');
+            //return redirect()->intended('dashboard');
+            return redirect('/payments');
         }
     }
 
