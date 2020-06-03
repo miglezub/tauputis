@@ -248,7 +248,6 @@ class PaymentController extends Controller
             $payment->date = $random_Date;
             $payment->value = -mt_rand(10, 1000) / 10;
             $payment->fk_payment_type_id = mt_rand(2, 12);
-            dd($payment);
             $payment->save();
         }
         for($i = 1; $i < 6; $i++) {
