@@ -193,7 +193,7 @@ class PaymentController extends Controller
             if($payment[0]->fk_payment_type_id!=1) {
                 $payment_type=\App\Payment_type::where('id', $payment[0]->fk_payment_type_id)->first();
                 array_push($array, 
-                    array("value" => round(abs($payment->sum('value'), 2)), 
+                    array("value" => round(abs($payment->sum('value')), 2), 
                     "label" => $payment_type->name));
             }
         }
