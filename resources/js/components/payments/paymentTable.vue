@@ -43,7 +43,7 @@
                 @row-clicked="click"
                 >
                     <template v-slot:cell(value)="data">
-                        {{ data.item.value.toFixed(2) }}
+                        {{ data.item.value }}
                     </template>
                     <template v-slot:cell(payment_type)="data">
                         {{ payment_types[data.item.fk_payment_type_id-1].name }}
@@ -173,6 +173,7 @@ export default {
                     this.showBalance = true;
                 else
                     this.showBalance = false;
+                console.log(this.payments);
                 })
                 .catch(error => {
                     console.log(error);
