@@ -101,7 +101,7 @@ export default {
   methods: {
       filter() {
           this.loaded = false;
-          axios.get(`/apilinechartpayments?date_from=${this.date_from}?date_to=${this.date_to}`)
+          axios.get(`/apilinechartpayments?date_from=${this.date_from}&date_to=${this.date_to}`)
             .then(response => {
             this.values = response.data.map(item => item.balance)
             this.values.types = response.data.map(item => this.payment_types[item.fk_payment_type_id-1].name)
