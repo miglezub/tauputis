@@ -17,11 +17,4 @@ class Cart extends Model
     {
         return $this->belongsTo(Payment_type::class);
     }
-
-    public function updateLastMonthBalance() 
-    {
-        $carts=Auth::user()->carts;
-        //$carts::where('fk_type', $type);
-        return $carts;
-    }
 }
