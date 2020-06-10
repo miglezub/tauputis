@@ -92,9 +92,9 @@ export default {
         },
 
         getBalance(day) {
-            return day.reduce(function(sum, payment) {
+            return parseFloat(day.reduce(function(sum, payment) {
                 return sum + payment.value;
-            }, 0).toFixed(2);
+            }, 0)).toFixed(2);
         },
 
         getWeekBalance() {
