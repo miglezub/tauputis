@@ -171,9 +171,10 @@ class PaymentController extends Controller
             ->whereDate('date', '<', $dateFrom)
             ->sum('value');
         foreach($payments as $payment) {
-            $value=round($payment->value+$lastValue, 2);
-            $payment->balance=$value;
-            $lastValue=$value;
+            $payment->value = round($payment->value, 2);
+            $value = round($payment->value+$lastValue, 2);
+            $payment->balance = $value;
+            $lastValue = $value;
         }
         return $payments;
     }
