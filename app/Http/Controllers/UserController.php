@@ -49,6 +49,7 @@ class UserController extends Controller
     {
         \App\Payment::where('fk_user_id', Auth::id())->delete();
         \App\Cart::where('fk_user_id', Auth::id())->delete();
+        \App\PeriodicPayment::where('fk_user_id', Auth::id())->delete();
     }
 
     public function destroyUser()
