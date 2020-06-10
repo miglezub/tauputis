@@ -1,15 +1,19 @@
 <template>
     <div class="mb-3">
         <div class="card h-100">
-            <p class="card-header font-weight-bold"></p>
+            <p class="card-header font-weight-bold">
+                <span class="float-right">{{ getWeekBalance() }}</span>
+            </p>
             <div class="card-body">
                 <div v-for="day in group" :key="day.id">
-                    <p v-text="day[0].date + ', ' + getDayName(day[0].date)" class="font-weight-bold border-bottom"></p>
+                    <p class="font-weight-bold border-bottom mb-0" v-text="day[0].date + ', ' + getDayName(day[0].date)"></p>
+                    <span class="float-right text-secondary">{{ getBalance(day) }}</span>
+                    <br>
                     <div v-for="payment in day" :key="payment.id" class="pl-2 ml-lg-4 mb-4" id="paymentDiv"
                         v-on:click="showPayment(payment.id)">
                         <div v-if="payment.caption" v-text="payment.caption" class="text-secondary"></div>
                         <div v-text="payment_types[payment.fk_payment_type_id-1].name" class="font-weight-bold h5"></div>
-                        <div v-text="payment.value" class="h5"></div>
+                        <div v-text="round(payment.value)" class="h5"></div>
                     </div>
                 </div>
             </div>
@@ -81,6 +85,28 @@ export default {
                     console.log(error);
                 });
                 
+        },
+
+        round(value) {
+            return parseFloat(value).toFixed(2);
+        },
+
+        getBalance(day) {
+            return day.reduce(function(sum, payment) {
+                return sum + payment.value;
+            }, 0).toFixed(2);
+        },
+
+        getWeekBalance() {
+            
+            var balance = 0;
+            $.each(this.group, function () {
+                $.each(this, function() {
+                    balance += this.value;
+                });
+                return balance;
+            });
+            return balance.toFixed(2);
         },
     }
 }

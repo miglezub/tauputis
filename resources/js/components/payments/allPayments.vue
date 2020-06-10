@@ -4,7 +4,7 @@
             <add-payment class="float-right mb-3" :payment_type_options="payment_types" @reload="update()"/>
         </div>
         <div v-if="loaded && grouped_payments.length != []">
-            <div v-if="width > 800" class="row">
+            <div v-if="width > 1000" class="row">
                 <button class="btn btn-light col-2 col-md-1 mb-md-3" v-if="page > 1" v-on:click="page--; loadPage()">
                     <span class="material-icons">chevron_left</span>
                 </button>

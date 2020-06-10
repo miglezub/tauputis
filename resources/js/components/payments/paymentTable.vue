@@ -1,7 +1,7 @@
 <template>
   <div class="container">
         <div v-if="showBalance" class="ml-2">
-            Filtruotas balansas: <span class="font-weight-bold">{{ getBalance() }}</span>
+            Filtruotas balansas: <span class="font-weight-bold">{{ round(getBalance()) }}</span>
         </div>
         <div class="container" style="height: 70px">
             <add-payment class="float-right mr-1 mb-2" :payment_type_options="payment_types" @reload="update()"/>
@@ -43,7 +43,7 @@
                 @row-clicked="click"
                 >
                     <template v-slot:cell(value)="data">
-                        {{ data.item.value }}
+                        {{ round(data.item.value) }}
                     </template>
                     <template v-slot:cell(payment_type)="data">
                         {{ payment_types[data.item.fk_payment_type_id-1].name }}
@@ -111,7 +111,7 @@ export default {
             {
                 key: 'payment_type',
                 label: 'Kategorija',
-                sortable: true
+                sortable: false
             },
             {
                 key: 'value',
@@ -128,7 +128,7 @@ export default {
             {
                 key: 'payment_type',
                 label: 'Kategorija',
-                sortable: true
+                sortable: false
             },
             {
                 key: 'value',
@@ -201,6 +201,10 @@ export default {
                 this.useMobileFields = false;
             else
                 this.useMobileFields = true;
+        },
+
+        round(value) {
+            return parseFloat(value).toFixed(2);
         }
     }
 }

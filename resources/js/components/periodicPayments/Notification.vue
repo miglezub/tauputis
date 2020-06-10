@@ -1,6 +1,6 @@
 <template>
   <span>
-    <span v-if="loaded" class="text-white pb-0" style="font-size: 16px;"> | {{ balance }}</span>
+    <span v-if="loaded" class="text-white pb-0" style="font-size: 16px;"> | {{ round(balance) }}</span>
     <span v-if="(loaded && showBadge) || (loaded && success_alert)">
       <b-badge id="popover-reactive-1" class="bg-p1-pink ml-2" style="font-size: 15px">{{ payments.length }}</b-badge>
       <b-popover target="popover-reactive-1"
@@ -14,7 +14,7 @@
               <br class="my-1">
               <b-button class="btn btn-sm bg-main-teal" v-on:click="addPayment(payment)">Pridėti</b-button>
               <b-button class="btn btn-sm bg-p1-dark" v-on:click="showPeriodic(payment.id)">Peržiūrėti</b-button>
-              <hr>
+              <hr class="mt-2 mb-1">
             </div>
           </div>
       </b-popover>
@@ -101,6 +101,10 @@ export default {
 
     showPeriodic(id) {
       window.location.replace(`/payments?showPeriodic&showId=${id}`);
+    },
+
+    round(value) {
+      return parseFloat(value).toFixed(2);
     }
   }
 }

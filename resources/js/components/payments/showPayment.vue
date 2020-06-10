@@ -71,7 +71,7 @@
                                     trim
                                 ></b-form-input>
                             </b-form-group>
-                            <div v-else v-text="selected_payment.value"></div>
+                            <div v-else v-text="round(selected_payment.value)"></div>
                             <!--
                             <input v-if="edit" v-model="selected_payment.value" class="form-control" type="number"
                                 step="0.01" :min="getMin()" :max="getMax()">
@@ -193,9 +193,9 @@ export default {
         editPayment() {
             if(this.edit == false) {
                 this.edit = true;
+                this.selected_payment.value = parseFloat(this.selected_payment.value).toFixed(2);
             }
             else {
-                //delete
                 if(this.validate()) {
                     axios
                         .post(`/payments/update/${this.selected_payment.id}`, this.selected_payment)
@@ -240,6 +240,10 @@ export default {
             return 'Suma turi įeiti į intervalą nuo ' + this.getMin() + ' iki ' + this.getMax();
             }
         },
+
+        round(value) {
+            return parseFloat(value).toFixed(2);
+        }
     }
 }
 </script>

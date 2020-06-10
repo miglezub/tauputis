@@ -24,7 +24,7 @@
                         {{ getDay(data.item.periodic_day, data.item.periodic_type) }}
                     </template>
                     <template v-slot:cell(value)="data">
-                        {{ data.item.value }}
+                        {{ round(data.item.value) }}
                     </template>
                     <template v-slot:cell(payment_type)="data">
                         {{ payment_types[data.item.fk_payment_type_id-1].name }}
@@ -46,7 +46,7 @@
             </div>
         </div>
         <show-periodic ref="modal" :payment_types="payment_types" :selected_payment="selected" 
-            :selected_type="selected_type" @reload="fetchData(); show_id = -1" />
+            :selected_type="selected_type" @reload="show_id = -1; fetchData()" />
   </div>
 </template>
 
@@ -90,7 +90,7 @@ export default {
             {
                 key: 'payment_type',
                 label: 'Kategorija',
-                sortable: true
+                sortable: false
             },
             {
                 key: 'value',
@@ -107,7 +107,7 @@ export default {
             {
                 key: 'payment_type',
                 label: 'Kategorija',
-                sortable: true
+                sortable: false
             },
             {
                 key: 'value',
@@ -220,6 +220,10 @@ export default {
                 this.useMobileFields = false;
             else
                 this.useMobileFields = true;
+        },
+
+        round(value) {
+            return parseFloat(value).toFixed(2);
         }
     }
 }

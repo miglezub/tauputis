@@ -117,7 +117,7 @@
                                 trim
                             ></b-form-input>
                         </b-form-group>
-                        <div v-else v-text="selected_payment.value"></div>
+                        <div v-else v-text="round(selected_payment.value)"></div>
 
                         <div v-if="selected_payment.fk_payment_type_id != 1" class="form-group">
                             <label class="font-weight-bold mb-0" for="type" style="font-size: 16px">Kategorija</label>
@@ -227,12 +227,13 @@ export default {
 
         closeModal() {
             this.$refs['showPeriodicPaymentModal'].hide();
+            this.$emit('reload');
             this.edit = false;
             this.edit_errors = [];
         },
 
         resetSelected() {
-            this.selected= {
+            this.selected_payment= {
                 caption: '',
                 description: '',
                 is_income: 0,
@@ -247,15 +248,15 @@ export default {
         deleteSelected() {
             axios.delete(`/periodic/delete/${this.selected_payment.id}`)
                 .then(response => {
-                    this.$emit('reload');
-                    this.resetSelected();
                     this.closeModal();
+                    //this.resetSelected();
                 });
         },
 
         editPayment() {
             if(this.edit == false) {
                 this.edit = true;
+                this.selected_payment.value = parseFloat(this.selected_payment.value).toFixed(2);
             }
             else {
                 if(this.validate()) {
@@ -264,7 +265,6 @@ export default {
                         .then(response => {
                             this.edit = false;
                             this.edit_errors = [];
-                            this.$emit('reload');
                         });
                 }                
             }
@@ -323,6 +323,10 @@ export default {
         invalidFeedbackPeriodicDay() {
             return "Galite pasirinkti dienas nuo 1 iki 28";
         },
+
+        round(value) {
+            return parseFloat(value).toFixed(2);
+        }
     }
 }
 </script>
