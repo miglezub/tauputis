@@ -106,7 +106,7 @@ export default {
                 });
                 return balance;
             });
-            return balance.toFixed(2);
+            return parseFloat(balance).toFixed(2);
         },
     }
 }
