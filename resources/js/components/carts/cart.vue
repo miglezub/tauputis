@@ -26,7 +26,7 @@
                     <option value="false">Išjungtas</option>
                     <option value="true">Įjungtas</option>
                 </select>
-                <span v-else class="font-weight-bold" v-text="cart.transfer_balance == true ? 'Įjungtas' : 'Išjungtas' "></span>
+                <span v-else class="font-weight-bold" v-text="transferBalanceStatus()"></span>
             </p>
             <button v-if="edit" @click="saveEdit()" class="d-block mb-2 btn bg-main-teal">Išsaugoti</button>
 
@@ -118,6 +118,11 @@ export default {
             }
             console.log(true);
             return true;
+        },
+        transferBalanceStatus() {
+            if(this.cart.transfer_balance == true)
+                return "Įjungtas";
+            else return "Išjungtas";
         },
         /* Checks if edit input has errors */
         validate() {
