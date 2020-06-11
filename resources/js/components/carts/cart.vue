@@ -110,8 +110,12 @@ export default {
             return parseFloat(this.balance).toFixed(2) || 0;
         },
         exceeds() {
-            if(this.getBalance() < this.cart.monthly_goal)
+            console.log(this.getBalance());
+            if(parseFloat(this.getBalance()) < this.cart.monthly_goal) {
+                console.log(false);
                 return false;
+            }
+            console.log(true);
             return true;
         },
         /* Checks if edit input has errors */
