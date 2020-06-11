@@ -23,8 +23,8 @@
                 <br>
                 Išlaidų perkėlimas į kitą mėnesį: 
                 <select v-if="edit" name="transfer" id="transfer" class="form-control w-50" v-model="cart.transfer_balance">
-                    <option value="false">Išjungtas</option>
-                    <option value="true">Įjungtas</option>
+                    <option value=false>Išjungtas</option>
+                    <option value=true>Įjungtas</option>
                 </select>
                 <span v-else class="font-weight-bold" v-text="cart.transfer_balance == true ? 'Įjungtas' : 'Išjungtas' "></span>
             </p>
@@ -104,13 +104,14 @@ export default {
 
     methods: {
         getBalance() {
-            if(this.cart.transfer_balance == true
+            if(this.cart.transfer_balance === true
                 && parseFloat(this.cart.last_month_value) > parseFloat(this.cart.monthly_goal))
                 return (parseFloat(this.balance) + parseFloat(this.cart.last_month_value) - parseFloat(this.cart.monthly_goal)).toFixed(2);
             return parseFloat(this.balance).toFixed(2) || 0;
         },
         exceeds() {
             console.log(this.getBalance());
+            console.log(this.cart.transfer_balance);
             if(parseFloat(this.getBalance()) < parseFloat(this.cart.monthly_goal)) {
                 console.log(false);
                 return false;
