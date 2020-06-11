@@ -23,10 +23,10 @@
                 <br>
                 Išlaidų perkėlimas į kitą mėnesį: 
                 <select v-if="edit" name="transfer" id="transfer" class="form-control w-50" v-model="cart.transfer_balance">
-                    <option value=false>Išjungtas</option>
-                    <option value=true>Įjungtas</option>
+                    <option value="false">Išjungtas</option>
+                    <option value="true">Įjungtas</option>
                 </select>
-                <span v-else class="font-weight-bold" v-text="cart.transfer_balance == true ? 'Įjungtas' : 'Išjungtas' "></span>
+                <span v-else class="font-weight-bold" v-text="cart.transfer_balance ? 'Įjungtas' : 'Išjungtas' "></span>
             </p>
             <button v-if="edit" @click="saveEdit()" class="d-block mb-2 btn bg-main-teal">Išsaugoti</button>
 
@@ -44,7 +44,7 @@
                 <p>
                     Šio mėnesio išleista suma: <span class="font-weight-bold">{{ balance.toFixed(2) }}</span> neviršija numatytos.
                     <br>
-                    <span v-if="cart.transfer_balance == true">
+                    <span v-if="cart.transfer_balance">
                         Praeito mėnesio suma, perskaičiuota šiam mėnesiui: 
                         <span class="font-weight-bold">{{ (getBalance()-balance).toFixed(2) }}</span>
                     </span>
@@ -69,14 +69,14 @@
                     <span v-if="balance > cart.monthly_goal">viršija numatytą!</span>
                     <span v-else>neviršija numatytos.</span>
                     <br>
-                    <span v-if="cart.transfer_balance == true">
+                    <span v-if="cart.transfer_balance">
                         Praeito mėnesio suma, perskaičiuota šiam mėnesiui: 
                         <span class="font-weight-bold">{{ (getBalance()-balance).toFixed(2) }}</span>
                     </span>
                     <span v-else>Išlaidų perskaičiavimas iš praeito mėnesio išjungtas.</span>
                     <br class="mb-2">
                     Likutis: <span class="font-weight-bold">{{(getBalance()-cart.monthly_goal).toFixed(2)}}</span>
-                        <span v-if="cart.transfer_balance == true"> bus </span>
+                        <span v-if="cart.transfer_balance"> bus </span>
                         <span v-else> nebus </span>
                         perkeltas į kitą mėnesį.
                 </p>
@@ -104,7 +104,7 @@ export default {
 
     methods: {
         getBalance() {
-            if(this.cart.transfer_balance === true
+            if(this.cart.transfer_balance == true
                 && parseFloat(this.cart.last_month_value) > parseFloat(this.cart.monthly_goal))
                 return (parseFloat(this.balance) + parseFloat(this.cart.last_month_value) - parseFloat(this.cart.monthly_goal)).toFixed(2);
             return parseFloat(this.balance).toFixed(2) || 0;
