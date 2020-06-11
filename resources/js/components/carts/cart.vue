@@ -32,7 +32,7 @@
 
             <label for="balance">Mėnesio balanso likutis:</label>
             <!-- monthly balance does not exceed monthly goal -->
-            <div v-if="getBalance()<cart.monthly_goal">
+            <div v-if="!exceeds()">
                 <div class="row mb-0">
                     <div class="progress w-75 ml-3" id="progress"> 
                         <div class="progress-bar bg-main-teal" role="progressbar" 
@@ -108,6 +108,11 @@ export default {
                 && this.cart.last_month_value > this.cart.monthly_goal)
                 return (this.balance + this.cart.last_month_value - this.cart.monthly_goal).toFixed(2);
             return parseFloat(this.balance).toFixed(2) || 0;
+        },
+        exceeds() {
+            if(this.getBalance() < this.cart.monthly_goal)
+                return false;
+            return true;
         },
         /* Checks if edit input has errors */
         validate() {
