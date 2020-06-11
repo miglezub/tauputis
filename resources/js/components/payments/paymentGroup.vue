@@ -93,7 +93,7 @@ export default {
 
         getBalance(day) {
             return parseFloat(day.reduce(function(sum, payment) {
-                return sum + payment.value;
+                return sum + parseFloat(payment.value);
             }, 0)).toFixed(2);
         },
 
@@ -102,7 +102,7 @@ export default {
             var balance = 0;
             $.each(this.group, function () {
                 $.each(this, function() {
-                    balance += this.value;
+                    balance += parseFloat(this.value);
                 });
                 return balance;
             });

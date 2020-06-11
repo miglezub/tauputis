@@ -107,7 +107,7 @@ export default {
             if(this.cart.transfer_balance == 1
                 && this.cart.last_month_value > this.cart.monthly_goal)
                 return (this.balance + this.cart.last_month_value - this.cart.monthly_goal).toFixed(2);
-            return this.balance.toFixed(2) || 0;
+            return parseFloat(this.balance).toFixed(2) || 0;
         },
         /* Checks if edit input has errors */
         validate() {
