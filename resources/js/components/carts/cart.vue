@@ -23,10 +23,10 @@
                 <br>
                 Išlaidų perkėlimas į kitą mėnesį: 
                 <select v-if="edit" name="transfer" id="transfer" class="form-control w-50" v-model="cart.transfer_balance">
-                    <option value="false">Išjungtas</option>
-                    <option value="true">Įjungtas</option>
+                    <option v-bind:value="false">Išjungtas</option>
+                    <option v-bind:value="true">Įjungtas</option>
                 </select>
-                <span v-else class="font-weight-bold" v-text="transferBalanceStatus()"></span>
+                <span v-else class="font-weight-bold" v-text="cart.transfer_balance == true ? 'Įjungtas' : 'Išjungtas' "></span>
             </p>
             <button v-if="edit" @click="saveEdit()" class="d-block mb-2 btn bg-main-teal">Išsaugoti</button>
 
@@ -81,7 +81,6 @@
                         perkeltas į kitą mėnesį.
                 </p>
             </div>
-            <p class="border-top">Praėjusio mėnesio išleista suma: <span class="font-weight-bold" v-text="cart.last_month_value || 0"></span></p>
         </div>
     </div>
 </template>
@@ -118,11 +117,6 @@ export default {
             }
             console.log(true);
             return true;
-        },
-        transferBalanceStatus() {
-            if(this.cart.transfer_balance == true)
-                return "Įjungtas";
-            else return "Išjungtas";
         },
         /* Checks if edit input has errors */
         validate() {
