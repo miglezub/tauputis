@@ -105,13 +105,13 @@ export default {
     methods: {
         getBalance() {
             if(this.cart.transfer_balance == true
-                && this.cart.last_month_value > this.cart.monthly_goal)
+                && parseFloat(this.cart.last_month_value) > parseFloat(this.cart.monthly_goal))
                 return (parseFloat(this.balance) + parseFloat(this.cart.last_month_value) - parseFloat(this.cart.monthly_goal)).toFixed(2);
             return parseFloat(this.balance).toFixed(2) || 0;
         },
         exceeds() {
             console.log(this.getBalance());
-            if(parseFloat(this.getBalance()) < this.cart.monthly_goal) {
+            if(parseFloat(this.getBalance()) < parseFloat(this.cart.monthly_goal)) {
                 console.log(false);
                 return false;
             }
