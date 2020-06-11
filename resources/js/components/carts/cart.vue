@@ -26,7 +26,7 @@
                     <option value="false">Išjungtas</option>
                     <option value="true">Įjungtas</option>
                 </select>
-                <span v-else class="font-weight-bold" v-text="cart.transfer_balance ? 'Įjungtas' : 'Išjungtas' "></span>
+                <span v-else class="font-weight-bold" v-text="cart.transfer_balance == true ? 'Įjungtas' : 'Išjungtas' "></span>
             </p>
             <button v-if="edit" @click="saveEdit()" class="d-block mb-2 btn bg-main-teal">Išsaugoti</button>
 
