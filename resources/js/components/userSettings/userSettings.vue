@@ -1,10 +1,10 @@
 <template>
     <div class="container col-md-10">
         <b-container fluid class="ml-2">
+            <b-alert v-model="data_deleted" variant="success" dismissible>
+                Visi mokėjimų ir krepšelių duomenys buvo ištrinti!
+            </b-alert>
             <b-row class="mb-2">
-                <b-alert v-model="data_deleted" variant="success" dismissible>
-                    Visi mokėjimų ir krepšelių duomenys buvo ištrinti!
-                </b-alert>
                 <b-col md="8">
                     <div class="form-group">
                         <label class="font-weight-bold mb-0" for="username" style="font-size: 16px">Vartotojo vardas</label>
@@ -35,13 +35,6 @@
                         <div class="font-weight-bold text-danger" v-if="errors.email" v-text="errors.email[0]"></div>
                     </div>
                     <div class="form-group">
-                        <label v-if="edit" class="font-weight-bold mb-0" for="subscription" style="font-size: 16px">
-                            Ar sutinkate prenumeruoti el. laiškus?
-                        </label>
-                        <label v-else class="font-weight-bold mb-0" for="subscription" style="font-size: 16px">
-                            El. laiškų prenumerata 
-                            <span v-text="user.subscription == true ? 'įjungta' : 'išjungta'"></span>
-                        </label>
                         <b-form-group v-if="edit" id="subscription-group" label-for="subscription">
                             <b-form-checkbox
                             id="subscription"
@@ -49,10 +42,18 @@
                             v-model="user.subscription"
                             :value="true"
                             :unchecked-value="false"
+                            class="d-inline"
                             >
-                                <span v-text="user.subscription == true ? 'Taip' : 'Ne'"></span>
                             </b-form-checkbox>
+                            <label class="font-weight-bold mb-0 d-inline" for="subscription" style="font-size: 16px">
+                                Ar sutinkate prenumeruoti el. laiškus?
+                            </label>
                         </b-form-group>
+                        <label v-else class="font-weight-bold mb-0" for="subscription" style="font-size: 16px">
+                            El. laiškų prenumerata 
+                            <span v-text="user.subscription == true ? 'įjungta' : 'išjungta'"></span>
+                        </label>
+                        
                     </div>
                 </b-col>
                 <b-col md="4">
