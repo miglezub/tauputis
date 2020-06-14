@@ -40,20 +40,17 @@
                         </label>
                         <label v-else class="font-weight-bold mb-0" for="subscription" style="font-size: 16px">
                             El. laiškų prenumerata 
-                            <span v-if="user.subscription == 1">įjungta</span>
-                            <span v-else>išjungta</span>.
+                            <span v-text="user.subscription == true ? 'įjungta' : 'išjungta'"></span>
                         </label>
                         <b-form-group v-if="edit" id="subscription-group" label-for="subscription">
                             <b-form-checkbox
                             id="subscription"
                             type="checkbox"
                             v-model="user.subscription"
-                            value="1"
-                            unchecked-value="0"
-                            v-on:change="sub()"
+                            :value="true"
+                            :unchecked-value="false"
                             >
-                                <span v-if="user.subscription == 1">Taip</span>
-                                <span v-else>Ne</span>
+                                <span v-text="user.subscription == true ? 'Taip' : 'Ne'"></span>
                             </b-form-checkbox>
                         </b-form-group>
                     </div>
@@ -62,6 +59,7 @@
                     <button class="btn bg-main-teal" v-on:click="editUser()" v-text="edit ? 'Išsaugoti' : 'Redaguoti'"></button>
                 </b-col>
             </b-row>
+            <hr>
             <button class="btn bg-main-teal" v-on:click="$refs['confirmDeleteModal'].show()">Ištrinti visus vartotojo įrašus</button>
             <br>
             <button class="btn bg-p1-red mt-1" v-on:click="$refs['confirmUserDeleteModal'].show()">Ištrinti vartotojo paskyrą</button>
@@ -98,14 +96,6 @@ export default {
     },
 
     methods: {
-        sub() {
-            if(this.user.subscription == 0)
-                this.user.subscription = 1;
-            else if(this.user.subscription == 1)
-                this.user.subscription = 0;
-            console.log(this.user);
-        },
-
         editUser() {
             if(this.edit == false) {
                 this.edit = true;

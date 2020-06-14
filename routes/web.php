@@ -74,7 +74,8 @@ Route::get('/email', function() {
 Route::get('/sendEmail', function() {
     $users = User::all();
     foreach($users as $user) {
-        Mail::to($user->email)->send(new StatsMail($user->id));
+        if($user->subscription == true)
+            Mail::to($user->email)->send(new StatsMail($user->id));
     }
 });
 
