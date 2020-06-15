@@ -153,7 +153,7 @@ return [
         'value' => 'Suma',
         'name' => 'Vartotojo vardas',
         'email' => 'El. paštas',
-        'password' => 'Slaptažodžių',
+        'password' => 'Slaptažodis',
     ],
 
 ];

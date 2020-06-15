@@ -18,8 +18,9 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" 
-                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
-                                    oninvalid="this.setCustomValidity('Įveskite tinkamą el. pašto formatą')" oninput="this.setCustomValidity('')">
+                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus 
+                                    minlength="4" maxlength="255"
+                                    oninvalid="validation_login('email', 4)" oninput="validation_login('email', 8)">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -35,7 +36,7 @@
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
                                     name="password" required autocomplete="current-password" minlength="8" maxlength="255"
-                                    oninvalid="this.setCustomValidity('Slaptažodis turi būti ilgesnis nei 8 ir trumpesnis nei 255 simboliai')" oninput="this.setCustomValidity('')">
+                                    oninvalid="validation_login('password', 8)" oninput="validation_login('password', 8)">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -81,3 +82,18 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function validation_login(field_id, min_symbols) {
+            var txt = '';
+            if (document.getElementById(field_id).validity.valueMissing)
+                var txt = "Prašome užpildyti šį lauką";
+            else if (document.getElementById(field_id).validity.tooLong)
+                var txt = "Laukas būti sudarytas iš mažiau nei 255 simbolių";
+            else if(document.getElementById(field_id).validity.tooShort)
+                var txt = "Laukas turi būti sudarytas iš mažiausiai " + min_symbols + " simbolių";
+            document.getElementById(field_id).setCustomValidity(txt);
+        }
+    </script>
+@endpush
