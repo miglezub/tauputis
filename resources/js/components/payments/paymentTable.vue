@@ -1,7 +1,7 @@
 <template>
   <div class="container">
         <div v-if="showBalance" class="ml-2">
-            Filtruotas balansas: <span class="font-weight-bold">{{ round(getBalance()) }}</span>
+            Filtruotas balansas: <span class="font-weight-bold">{{ getBalance() }}</span>
         </div>
         <div class="container" style="height: 70px">
             <add-payment class="float-right mr-1 mb-2" :payment_type_options="payment_types" @reload="update()"/>
@@ -191,8 +191,9 @@ export default {
         },
 
         getBalance() {
-            return this.payments.length > 0 ? 
-                this.payments.map(payment => payment.value).reduce((acc, payment) => payment + acc) : 0;
+            return parseFloat(this.payments.reduce(function(sum, payment) {
+                return sum + parseFloat(payment.value);
+            }, 0)).toFixed(2);
         },
 
         getScreenWidth(event) {
