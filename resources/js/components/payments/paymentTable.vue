@@ -191,9 +191,11 @@ export default {
         },
 
         getBalance() {
-            return parseFloat(this.payments.reduce(function(sum, payment) {
-                return sum + parseFloat(payment.value);
-            }, 0)).toFixed(2);
+            var balance = 0;
+            $.each(this.payments, function () {
+                balance += parseFloat(this.value);
+            });
+            return parseFloat(balance).toFixed(2);
         },
 
         getScreenWidth(event) {
